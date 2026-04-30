@@ -98,7 +98,7 @@ Resume: ${resume_text}`
         email,
         resume_text,
         analysis_result: analysisResult,
-      })
+      } as any)
       .select("id")
       .single()
 
