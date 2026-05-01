@@ -8,7 +8,7 @@ async function extractTextFromPdfBuffer(buffer: Buffer): Promise<string> {
   const parser = new (PDFParser as any)(null, true)
 
   await new Promise<void>((resolve, reject) => {
-    parser.on("pdfParser_dataError", (err) => {
+    parser.on("pdfParser_dataError", (err: unknown) => {
       const e = err instanceof Error ? err : (err as { parserError?: Error })?.parserError
       reject(e ?? new Error("Failed to parse PDF."))
     })
