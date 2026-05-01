@@ -92,13 +92,16 @@ Resume: ${resume_text}`
       improvements: parsed.improvements,
     }
 
+    const insertPayload = {
+      email,
+      resume_text,
+      analysis_result: analysisResult,
+    }
+
     const { data, error } = await getSupabaseAdmin()
       .from("analyses")
-      .insert({
-        email,
-        resume_text,
-        analysis_result: analysisResult,
-      } as any)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .insert(insertPayload as any)
       .select("id")
       .single()
 
@@ -106,7 +109,8 @@ Resume: ${resume_text}`
       return Response.json({ error: "Failed to save analysis." }, { status: 500 })
     }
 
-    return Response.json({ analysisId: data.id, analysis: analysisResult })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return Response.json({ analysisId: (data as any)?.id, analysis: analysisResult })
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error"
     return Response.json({ error: message }, { status: 500 })
