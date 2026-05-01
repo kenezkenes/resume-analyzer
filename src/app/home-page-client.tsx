@@ -174,7 +174,7 @@ export default function HomePageClient() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4">
-        <section className="relative py-16 md:py-24">
+        <section className="relative pt-4 pb-12 md:pt-6 md:pb-16">
           <div className="grid items-center gap-10 md:grid-cols-2">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 rounded-full border bg-muted/30 px-3 py-1 text-xs text-muted-foreground">
@@ -226,7 +226,7 @@ export default function HomePageClient() {
             </div>
           </div>
 
-          <div ref={uploadRef} className="scroll-mt-24 pt-12">
+          <div ref={uploadRef} className="scroll-mt-24 pt-8 md:pt-10">
             <ResumeUpload onAnalyzed={onAnalyzed} />
           </div>
 

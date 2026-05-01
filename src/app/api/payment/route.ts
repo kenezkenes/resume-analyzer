@@ -1,5 +1,9 @@
 import { getSupabaseAdmin } from "@/lib/supabase"
 
+/**
+ * App-initiated checkout (POST) and return-url verification (GET).
+ * Paddle webhooks: use POST /api/payment/webhook (see webhook/route.ts).
+ */
 function getAppUrl() {
   return process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
 }
