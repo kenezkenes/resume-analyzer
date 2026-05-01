@@ -104,7 +104,8 @@ export async function POST(request: Request) {
     // Save payment reference on our side
     const { error } = await getSupabaseAdmin()
       .from("analyses")
-      .update({ payment_id: transactionId })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .update({ payment_id: transactionId } as any)
       .eq("id", analysisId)
 
     if (error) {
@@ -146,7 +147,8 @@ export async function GET(request: Request) {
 
     const { error } = await getSupabaseAdmin()
       .from("analyses")
-      .update({ paid: true, payment_id: transactionId })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .update({ paid: true, payment_id: transactionId } as any)
       .eq("id", analysisId)
 
     if (error) {
