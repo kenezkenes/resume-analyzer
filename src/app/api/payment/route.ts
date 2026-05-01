@@ -102,10 +102,12 @@ export async function POST(request: Request) {
     }
 
     // Save payment reference on our side
-    const { error } = await getSupabaseAdmin()
-      .from("analyses")
+    const { error } = await (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .update({ payment_id: transactionId } as any)
+      getSupabaseAdmin() as any
+    )
+      .from("analyses")
+      .update({ payment_id: transactionId })
       .eq("id", analysisId)
 
     if (error) {
@@ -145,10 +147,12 @@ export async function GET(request: Request) {
       return Response.json({ error: `Transaction not successful (${status ?? "unknown"}).` }, { status: 402 })
     }
 
-    const { error } = await getSupabaseAdmin()
-      .from("analyses")
+    const { error } = await (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .update({ paid: true, payment_id: transactionId } as any)
+      getSupabaseAdmin() as any
+    )
+      .from("analyses")
+      .update({ paid: true, payment_id: transactionId })
       .eq("id", analysisId)
 
     if (error) {
