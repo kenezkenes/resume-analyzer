@@ -22,7 +22,7 @@ export function getSupabaseAdmin() {
   if (_supabaseAdmin) return _supabaseAdmin
   if (!supabaseServiceRoleKey) throw new Error("Missing env var: SUPABASE_SERVICE_ROLE_KEY")
 
-  _supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey, {
+  _supabaseAdmin = createClient(supabaseUrl!, supabaseServiceRoleKey!, {
     auth: { persistSession: false },
   })
 
