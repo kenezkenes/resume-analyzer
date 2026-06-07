@@ -8,7 +8,9 @@ function getAppUrl() {
   return process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
 }
 
-const PADDLE_SANDBOX_API_BASE_URL = "https://sandbox-api.paddle.com"
+const PADDLE_API_BASE_URL = process.env.PADDLE_SANDBOX === "true"
+  ? "https://sandbox-api.paddle.com"
+  : "https://api.paddle.com"
 
 function getPaddleApiKey() {
   const apiKey = process.env.PADDLE_API_KEY
@@ -20,7 +22,7 @@ async function paddleRequest<T>(
   path: string,
   init?: Omit<RequestInit, "headers"> & { headers?: Record<string, string> }
 ): Promise<{ ok: boolean; status: number; bodyText: string; json: T | null }> {
-  const url = `${PADDLE_SANDBOX_API_BASE_URL}${path}`
+  const url = `${PADDLE_API_BASE_URL}${path}`
   const res = await fetch(url, {
     ...init,
     headers: {
